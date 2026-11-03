@@ -80,4 +80,5 @@ def test_example_is_secret_free() -> None:
     data = yaml.safe_load(file.read_text(encoding="utf-8"))
     assert data == {
         "port": 8766, "ngrok_authtoken": "", "ngrok_domain": "", "bearer_token": "",
+        "github_client_id": "", "github_client_secret": "",
     }
