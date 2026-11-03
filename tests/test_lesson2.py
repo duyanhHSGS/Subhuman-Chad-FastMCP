@@ -53,3 +53,4 @@ def test_example_has_no_credentials() -> None:
     assert example["port"] == 8766
     assert not example["ngrok_authtoken"]
     assert not example["ngrok_domain"]
+    assert not example["bearer_token"]
