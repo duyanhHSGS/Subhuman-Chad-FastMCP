@@ -63,3 +63,6 @@ git-plz-ignore/
 
 # Private Lesson 2 credentials
 /config.yaml
+
+# Portable Lesson 6 OAuth registrations and tokens
+/oauth-state/
