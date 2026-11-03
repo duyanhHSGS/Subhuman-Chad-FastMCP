@@ -81,4 +81,5 @@ def test_example_is_secret_free() -> None:
     assert data == {
         "port": 8766, "ngrok_authtoken": "", "ngrok_domain": "", "bearer_token": "",
         "github_client_id": "", "github_client_secret": "",
+        "github_allowed_user_id": 0,
     }
