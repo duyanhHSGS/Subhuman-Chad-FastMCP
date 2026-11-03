@@ -60,3 +60,6 @@ desktop.ini
 
 # Private architecture notes
 git-plz-ignore/
+
+# Private Lesson 2 credentials
+/config.yaml
