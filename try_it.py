@@ -4,7 +4,7 @@ import asyncio
 
 from fastmcp import Client
 
-from Lesson1 import mcp
+from security.Lesson1 import mcp
 
 
 async def main() -> None:

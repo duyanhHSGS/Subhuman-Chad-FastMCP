@@ -15,7 +15,11 @@ from pydantic import AnyHttpUrl
 
 
 def app_directory() -> Path:
-    return Path(sys.executable if getattr(sys, "frozen", False) else __file__).resolve().parent
+    return (
+        Path(sys.executable).resolve().parent
+        if getattr(sys, "frozen", False)
+        else Path(__file__).resolve().parent.parent
+    )
 
 
 CONFIG = app_directory() / "config.yaml"

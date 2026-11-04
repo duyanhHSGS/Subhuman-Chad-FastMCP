@@ -8,7 +8,7 @@ from fastmcp import FastMCP
 from fastmcp.server.auth.providers.github import GitHubProvider
 from key_value.aio.stores.memory import MemoryStore
 
-CONFIG = Path(__file__).with_name("config.yaml")
+CONFIG = Path(__file__).resolve().parent.parent / "config.yaml"
 
 
 def make_server(config: dict[str, str | int]) -> FastMCP:

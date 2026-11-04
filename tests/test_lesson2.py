@@ -8,7 +8,7 @@ import pytest
 import yaml
 from fastmcp import Client
 
-import Lesson2
+from security import Lesson2
 
 
 def test_greeting_tool() -> None:
@@ -49,7 +49,7 @@ def test_forwarding(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
 
 
 def test_example_has_no_credentials() -> None:
-    example = yaml.safe_load(Path(Lesson2.__file__).with_name("config_example.yaml").read_text())
+    example = yaml.safe_load((Path(Lesson2.__file__).resolve().parent.parent / "config_example.yaml").read_text())
     assert example["port"] == 8766
     assert not example["ngrok_authtoken"]
     assert not example["ngrok_domain"]

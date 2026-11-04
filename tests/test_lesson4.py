@@ -9,7 +9,7 @@ import pytest
 import yaml
 from fastmcp.server.auth.providers.github import GitHubProvider
 
-import Lesson4
+from security import Lesson4
 
 
 SETTINGS: dict[str, str | int] = {
@@ -74,6 +74,6 @@ def test_ngrok_uses_shared_yaml(monkeypatch: pytest.MonkeyPatch, tmp_path: Path)
 
 
 def test_shared_example_has_empty_github_credentials() -> None:
-    example = yaml.safe_load(Path(Lesson4.__file__).with_name("config_example.yaml").read_text())
+    example = yaml.safe_load((Path(Lesson4.__file__).resolve().parent.parent / "config_example.yaml").read_text())
     assert example["github_client_id"] == ""
     assert example["github_client_secret"] == ""

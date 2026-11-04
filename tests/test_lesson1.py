@@ -4,7 +4,7 @@ import asyncio
 
 from fastmcp import Client
 
-from Lesson1 import greet, mcp
+from security.Lesson1 import greet, mcp
 
 
 def test_greeting() -> None:

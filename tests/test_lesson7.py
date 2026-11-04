@@ -14,7 +14,7 @@ from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import rsa
 from fastmcp.server.auth import RemoteAuthProvider
 
-import Lesson7
+from security import Lesson7
 
 
 ISSUER = "https://test.auth0.com/"
@@ -158,6 +158,6 @@ def test_main_forwarding_is_fake(monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 
 
 def test_example_has_no_auth0_issuer() -> None:
-    example = yaml.safe_load(Path(Lesson7.__file__).with_name("config_example.yaml").read_text())
+    example = yaml.safe_load((Path(Lesson7.__file__).resolve().parent.parent / "config_example.yaml").read_text())
     assert example["auth0_issuer"] == ""
     assert example["github_allowed_user_id"] == 0

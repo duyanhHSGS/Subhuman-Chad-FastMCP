@@ -12,7 +12,7 @@ from fastmcp import settings
 from fastmcp.server.auth.oauth_proxy import OAuthProxy
 from mcp.shared.auth import OAuthClientInformationFull
 
-import Lesson6
+from security import Lesson6
 
 
 FAKE_CONFIG: dict[str, str | int] = {

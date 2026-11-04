@@ -7,7 +7,7 @@ import yaml
 from fastmcp import FastMCP
 from fastmcp.server.auth.providers.jwt import StaticTokenVerifier
 
-CONFIG = Path(__file__).with_name("config.yaml")
+CONFIG = Path(__file__).resolve().parent.parent / "config.yaml"
 
 
 def make_server(token: str) -> FastMCP:

@@ -1,36 +1,16 @@
-"""Lesson 6: portable, persistent, owner-only GitHub OAuth MCP."""
+"""Lesson 5: GitHub OAuth, but only one GitHub account gets in."""
 
-import json
-import sys
 from pathlib import Path
 
 import ngrok
 import yaml
-from fastmcp import FastMCP, settings
+from fastmcp import FastMCP
 from fastmcp.server.auth.auth import AccessToken
 from fastmcp.server.auth.oauth_proxy import OAuthProxy
 from fastmcp.server.auth.providers.github import GitHubTokenVerifier
+from key_value.aio.stores.memory import MemoryStore
 
-
-def app_directory() -> Path:
-    """Use the executable's folder when frozen, otherwise the script's folder."""
-    return Path(sys.executable if getattr(sys, "frozen", False) else __file__).resolve().parent
-
-
-CONFIG = app_directory() / "config.yaml"
-
-
-def rebase_moved_state(home: Path) -> None:
-    """Correct file-store metadata paths after copying the portable folder."""
-    for info_file in (home / "oauth-proxy").glob("*/*-info.json"):
-        actual_dir = info_file.parent / info_file.name.removesuffix("-info.json")
-        if not actual_dir.is_dir():
-            raise FileNotFoundError(actual_dir)
-        metadata = json.loads(info_file.read_text(encoding="utf-8"))
-        current_dir = str(actual_dir.resolve())
-        if metadata["directory"] != current_dir:
-            metadata["directory"] = current_dir
-            info_file.write_text(json.dumps(metadata), encoding="utf-8")
+CONFIG = Path(__file__).resolve().parent.parent / "config.yaml"
 
 
 class OwnerOnly(GitHubTokenVerifier):
@@ -46,11 +26,8 @@ class OwnerOnly(GitHubTokenVerifier):
 def make_server(config: dict[str, str | int]) -> FastMCP:
     owner_id = int(config["github_allowed_user_id"])
     if owner_id <= 0:
-        raise ValueError("Set github_allowed_user_id in config.yaml")
+        raise ValueError("Set github_allowed_user_id in config.yaml to your numeric GitHub ID")
 
-    # FastMCP's default OAuth storage is encrypted and disk-backed.
-    settings.home = CONFIG.parent / "oauth-state"
-    rebase_moved_state(settings.home)
     auth = OAuthProxy(
         upstream_authorization_endpoint="https://github.com/login/oauth/authorize",
         upstream_token_endpoint="https://github.com/login/oauth/access_token",
@@ -58,8 +35,9 @@ def make_server(config: dict[str, str | int]) -> FastMCP:
         upstream_client_secret=str(config["github_client_secret"]),
         token_verifier=OwnerOnly(owner_id),
         base_url=f"https://{config['ngrok_domain']}",
+        client_storage=MemoryStore(),
     )
-    mcp = FastMCP("Lesson 6 - Portable OAuth", auth=auth)
+    mcp = FastMCP("Lesson 5 - GitHub Owner Only", auth=auth)
 
     @mcp.tool
     def greet(name: str) -> str:
@@ -76,7 +54,7 @@ def main() -> None:
         port, authtoken=config["ngrok_authtoken"], domain=config["ngrok_domain"]
     )
     try:
-        print(f"Portable OAuth MCP: {tunnel.url()}/mcp", flush=True)
+        print(f"Owner-only OAuth MCP: {tunnel.url()}/mcp", flush=True)
         mcp.run(transport="http", host="127.0.0.1", port=port)
     finally:
         ngrok.disconnect(tunnel.url())

@@ -8,7 +8,7 @@ import httpx2
 import pytest
 import yaml
 
-import Lesson5
+from security import Lesson5
 
 
 SETTINGS: dict[str, str | int] = {
@@ -101,7 +101,7 @@ def test_forwarding_uses_shared_yaml(monkeypatch: pytest.MonkeyPatch, tmp_path: 
 
 
 def test_shared_example_owner_is_not_configured() -> None:
-    template = Path(Lesson5.__file__).with_name("config_example.yaml")
+    template = Path(Lesson5.__file__).resolve().parent.parent / "config_example.yaml"
     data = yaml.safe_load(template.read_text(encoding="utf-8"))
     assert data["github_allowed_user_id"] == 0
     assert data["github_client_id"] == ""

@@ -7,7 +7,7 @@ import yaml
 from fastmcp import FastMCP
 
 mcp = FastMCP("Subhuman-Chad Learning Lab")
-CONFIG = Path(__file__).with_name("config.yaml")
+CONFIG = Path(__file__).resolve().parent.parent / "config.yaml"
 
 
 @mcp.tool

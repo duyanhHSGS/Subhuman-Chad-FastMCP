@@ -8,7 +8,7 @@ import httpx2
 import pytest
 import yaml
 
-import Lesson3
+from security import Lesson3
 
 
 def test_bearer_authorization() -> None:
@@ -76,7 +76,7 @@ def test_forwarding(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
 
 
 def test_example_is_secret_free() -> None:
-    file = Path(Lesson3.__file__).with_name("config_example.yaml")
+    file = Path(Lesson3.__file__).resolve().parent.parent / "config_example.yaml"
     data = yaml.safe_load(file.read_text(encoding="utf-8"))
     assert data == {
         "port": 8766, "ngrok_authtoken": "", "ngrok_domain": "", "bearer_token": "",
