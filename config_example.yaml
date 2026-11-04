@@ -1,5 +1,5 @@
 #copy it as config.yaml
-port: 8766
+port: 6969
 ngrok_authtoken: ''
 ngrok_domain: ''
 bearer_token: ''
