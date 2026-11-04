@@ -82,4 +82,5 @@ def test_example_is_secret_free() -> None:
         "port": 8766, "ngrok_authtoken": "", "ngrok_domain": "", "bearer_token": "",
         "github_client_id": "", "github_client_secret": "",
         "github_allowed_user_id": 0,
+        "auth0_issuer": "",
     }
