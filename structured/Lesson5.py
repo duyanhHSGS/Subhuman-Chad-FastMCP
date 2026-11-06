@@ -1,9 +1,9 @@
 """Lesson 5: FastMCP kitchen sink. Fill fields; inspect actual discovery.
 
 Run from this folder:
-    .venv-linux/bin/python Lesson5.py            # inspect locally
-    .venv-linux/bin/python Lesson5.py --demo     # exercise components
-    .venv-linux/bin/python Lesson5.py --serve    # 127.0.0.1:6970
+    .venv-linux/bin/python structured/Lesson5.py            # inspect locally
+    .venv-linux/bin/python structured/Lesson5.py --demo     # exercise components
+    .venv-linux/bin/python structured/Lesson5.py --serve    # 127.0.0.1:6970
 
 FastMCP 4.0.5. Auth is intentionally off; no internet or tunnel is needed.
 Empty provider/transform slots demonstrate constructor support, not behavior.

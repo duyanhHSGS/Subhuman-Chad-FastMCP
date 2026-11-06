@@ -1,8 +1,8 @@
 """Lesson 6: Lesson 5 stripped down to the ChatGPT-visible pieces.
 
-    .venv-linux/bin/python Lesson6.py            # inspect MCP tool JSON
-    .venv-linux/bin/python Lesson6.py --demo     # three real local calls
-    .venv-linux/bin/python Lesson6.py --serve    # localhost:6971
+    .venv-linux/bin/python structured/Lesson6.py            # inspect MCP tool JSON
+    .venv-linux/bin/python structured/Lesson6.py --demo     # three real local calls
+    .venv-linux/bin/python structured/Lesson6.py --serve    # localhost:6971
 
 Only server instructions, callable tools, their descriptions, argument
 constraints/defaults/examples, and structured results are deliberately authored.

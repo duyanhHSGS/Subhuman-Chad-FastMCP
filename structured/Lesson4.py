@@ -14,9 +14,9 @@ The specification allows more metadata and future extensions: a literal
 "no other fields can ever exist" promise would be incorrect.
 
 Run:
-    .venv-linux/bin/python Lesson4.py --inspect  # print actual MCP descriptor
-    .venv-linux/bin/python Lesson4.py --demo     # perform two local tool calls
-    .venv-linux/bin/python Lesson4.py            # serve MCP on loopback
+    .venv-linux/bin/python structured/Lesson4.py --inspect  # print actual MCP descriptor
+    .venv-linux/bin/python structured/Lesson4.py --demo     # perform two local tool calls
+    .venv-linux/bin/python structured/Lesson4.py            # serve MCP on loopback
 """
 
 import argparse
